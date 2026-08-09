@@ -42,8 +42,8 @@ object ShareHelper {
 
     /**
      * Resolves a mixed-mime-type sharesheet type. When items differ
-     * (some image, some video) "*/*" is used so the sharesheet still
-     * offers every valid target instead of filtering incorrectly.
+     * (some image, some video) a wildcard type is used so the sharesheet
+     * still offers every valid target instead of filtering incorrectly.
      */
     fun resolveShareMimeType(mimeTypes: List<String>): String {
         val distinct = mimeTypes.map { it.substringBefore("/") }.distinct()
