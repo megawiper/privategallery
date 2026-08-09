@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.flow.first
 import com.privategallery.app.core.di.AppContainer
 import com.privategallery.app.core.di.SimpleViewModelFactory
 import com.privategallery.app.core.ui.components.GalleryFullScreenLoading
@@ -107,7 +108,7 @@ fun PrivateVideoViewerRoot(
     var resolvedStartId by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(repository) {
-        val videos = kotlinx.coroutines.flow.first(repository.observeVideos())
+        val videos = repository.observeVideos().first()
         resolvedStartId = videos.getOrNull(startIndex)?.secureId ?: videos.firstOrNull()?.secureId
     }
 
