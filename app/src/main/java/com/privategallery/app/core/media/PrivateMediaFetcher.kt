@@ -9,7 +9,6 @@ import coil.fetch.SourceResult
 import coil.request.Options
 import com.privategallery.app.data.privatestore.PrivateStorageManager
 import okio.Buffer
-import okio.FileSystem
 import java.io.ByteArrayOutputStream
 
 /**
@@ -24,7 +23,8 @@ import java.io.ByteArrayOutputStream
  */
 class PrivateMediaFetcher(
     private val secureId: String,
-    private val storageManager: PrivateStorageManager
+    private val storageManager: PrivateStorageManager,
+    private val context: android.content.Context
 ) : Fetcher {
 
     override suspend fun fetch(): FetchResult {
@@ -35,7 +35,7 @@ class PrivateMediaFetcher(
         }
         val buffer = Buffer().write(output.toByteArray())
         return SourceResult(
-            source = ImageSource(buffer, FileSystem.SYSTEM),
+            source = ImageSource(buffer, context),
             mimeType = null,
             dataSource = DataSource.DISK
         )
@@ -45,7 +45,7 @@ class PrivateMediaFetcher(
         override fun create(data: String, options: Options, imageLoader: ImageLoader): Fetcher? {
             if (!data.startsWith("private://")) return null
             val secureId = data.removePrefix("private://")
-            return PrivateMediaFetcher(secureId, storageManager)
+            return PrivateMediaFetcher(secureId, storageManager, options.context)
         }
     }
 }
