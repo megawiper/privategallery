@@ -23,6 +23,7 @@ import com.privategallery.app.ui.albums.AlbumsScreen
 import com.privategallery.app.ui.albums.AlbumsViewModel
 import com.privategallery.app.ui.favorites.FavoritesScreen
 import com.privategallery.app.ui.favorites.FavoritesViewModel
+import com.privategallery.app.ui.splash.SplashViewModel
 import com.privategallery.app.ui.home.HomeScreen
 import com.privategallery.app.ui.home.HomeViewModel
 import com.privategallery.app.ui.onboarding.WelcomeScreen
